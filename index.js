@@ -27,41 +27,6 @@ var raf = require('cog/raf');
   intercepts the request and creates it's own fake video element that is
   passed back to the render call.
 
-  ## Using the Processing Pipeline
-
-  A processing pipeline has been included to assist with
-  manipulating the canvas on the fly. Adding a processor to the pipeline is
-  simply a matter of adding a pipeline processor available on the returned
-  fake video:
-
-  ```js
-  // add a processor
-  canvas.pipeline.add(function(imageData) {
-    // examine the pixel data
-
-    // if we've modified the pixel data and want to write that back
-    // to the canvas then we must return a truthy value
-    return true;
-  });
-  ```
-
-  A more complete example is shown below:
-
-  <<< examples/grayscale-filter.js
-
-  ## A Note with Regards to CPU Usage
-
-  By default rtc-canvas will draw at 25fps but this can be modified to capture
-  at a lower frame rate for slower devices, or increased if you have a
-  machine with plenty of grunt.
-
-  ## Reference
-
-  ### canvas(target, opts)
-
-  Create a fake video element for the specified target element.
-
-  - `fps` - the redraw rate of the fake video (default = 25)
   
 **/
 module.exports = function(target, opts) {
