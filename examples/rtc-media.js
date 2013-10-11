@@ -1,7 +1,7 @@
-var camera = require('rtc-media');
+var media = require('rtc-media');
 var waveform = require('..');
 
-var localvideo = camera();
+var localvideo = media();
 
 var videoElement = localvideo.render(document.body);
 

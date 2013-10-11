@@ -21,12 +21,6 @@ var raf = require('cog/raf');
   example of how it works there:
 
   <<< examples/rtc-media.js
-
-  Normally, the `media().render` call will create a `<video>` element in
-  the specified target container.  In this case, however, `rtc-canvas`
-  intercepts the request and creates it's own fake video element that is
-  passed back to the render call.
-
   
 **/
 module.exports = function(target, opts) {

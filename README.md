@@ -18,10 +18,10 @@ This was primarily written to work with the
 example of how it works there:
 
 ```js
-var camera = require('rtc-media');
+var media = require('rtc-media');
 var waveform = require('rtc-audio');
 
-var localvideo = camera();
+var localvideo = media();
 
 var videoElement = localvideo.render(document.body);
 
@@ -29,11 +29,6 @@ var canvas = waveform(videoElement, {"stream" : localvideo});
 
 
 ```
-
-Normally, the `media().render` call will create a `<video>` element in
-the specified target container.  In this case, however, `rtc-canvas`
-intercepts the request and creates it's own fake video element that is
-passed back to the render call.
 
 ## License(s)
 
