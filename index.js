@@ -30,8 +30,15 @@ var raf = require('cog/raf');
   The canvas will be added to the body element unless you provide a different
   element to attach it to.
 
-
   <<< examples/new-audio.js
+
+
+  ## Usage with a media element
+
+  This example shows how to create a waveform display for a video element.
+  It also shows how to attach the waveform to a separate element.
+
+  <<< examples/video-element.js
 
 
   ## Parameters for waveform
@@ -60,8 +67,10 @@ module.exports = function(target, opts) {
     target :
     document.createElement('video');
 
+  var attach = (opts || {}).attach;
+
   // attach canvas to DOM
-  if ((opts || {}).attach) {
+  if (attach) {
     // if there is an attach element, use that
     attach.appendChild(canvas);
   } else if (target === media && media.parentNode) {
@@ -69,14 +78,14 @@ module.exports = function(target, opts) {
     media.parentNode.appendChild(canvas);
   } else {
     // fallback: insert canvas after body
-    var body = document.getElementsByTagName("body")[0];
+    var body = document.getElementsByTagName('body')[0];
     body.appendChild(canvas);
   }
 
   // initialise the canvas width and height
   canvas.width = (opts || {}).width || 480;
   canvas.height = (opts || {}).height || 100;
-  canvas.style.border = "red 1px solid";
+  canvas.style.border = 'red 1px solid';
 
 
   // initialise the canvas pipeline

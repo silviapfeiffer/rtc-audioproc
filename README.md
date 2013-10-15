@@ -36,7 +36,6 @@ This example shows how to pipe an audio file into the waveform display.
 The canvas will be added to the body element unless you provide a different
 element to attach it to.
 
-
 ```js
 var waveform = require('rtc-audio');
 
@@ -46,6 +45,31 @@ var canvas = waveform(audio, {"play" : true});
 
 audio.play();
 
+```
+
+
+## Usage with a media element
+
+This example shows how to create a waveform display for a video element.
+It also shows how to attach the waveform to a separate element.
+
+```js
+var waveform = require('rtc-audio');
+
+var body = document.getElementsByTagName('body')[0];
+var div = document.createElement('div');
+var video = document.createElement('video');
+
+video.src = 'examples/media/sintel_trailer.webm';
+video.controls = 'controls';
+
+body.appendChild(div);
+body.appendChild(video);
+
+
+var canvas = waveform(video, {"play" : true, "attach" : div });
+
+video.play();
 ```
 
 
