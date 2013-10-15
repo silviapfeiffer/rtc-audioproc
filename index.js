@@ -9,18 +9,45 @@ var raf = require('cog/raf');
   # rtc-audio
 
   This is a small helper module that allows you to render a canvas
-  for an audio or video element using the Web Audio API. This can be
-  useful when you want to display a waveform or a frequency display,
-  or to track down when a video or audio element does not behave as
-  you expect.
+  to visualize audio from an audio or video element, or a getUserMedia
+  stream. It uses the Web Audio API. This can be useful to display
+  audio visually, or to track down when a video or audio element does
+  not behave as you expect.
 
-  ## Example Usage
+
+  ## Usage with WebRTC
 
   This was primarily written to work with the
   [rtc-media](https://github.com/rtc-io/rtc-media) library so here's an
   example of how it works there:
 
   <<< examples/rtc-media.js
+
+
+  ## Usage with Audio interface
+
+  This example shows how to pipe an audio file into the waveform display.
+  The canvas will be added to the body element unless you provide a different
+
+
+  <<< examples/new-audio.js
+
+
+  ## Parameters for waveform
+
+  * target : media element or Audio instance 
+  * opts:
+    * width : the width of the canvas
+    * height : the height of the canvas
+    * stream : if you're using WebRTC, you need to hand in the MediaStream directly
+    * play : if set to true, also route the audio to the output device
+
+  ## Running the examples
+
+  You can use [beefy](http://didact.us/beefy/) to run the examples, e.g.
+
+  $ beefy examples/rtc-media.js
+
   
 **/
 module.exports = function(target, opts) {
@@ -33,8 +60,14 @@ module.exports = function(target, opts) {
 
   // if the target is a media element
   if (target === media) {
-    // insert the canvas after the media parent element
-    media.parentNode.appendChild(canvas);
+    if (media.parentNode) {
+      // insert the canvas after the media parent element
+      media.parentNode.appendChild(canvas);
+    } else {
+      // insert after body
+      var body = document.getElementsByTagName("body")[0];
+      body.appendChild(canvas);
+    }
   }
   // otherwise: error
   else
@@ -58,9 +91,8 @@ module.exports = function(target, opts) {
 /*
   ### createWaveform(canvas, media, opts) ==> EventEmitter
 
-  Inject the required fake properties onto the canvas and return a
-  node-style EventEmitter that will provide updates on when the properties
-  change.
+  Push the audio through the drawing loop and display the waveform
+  in the canvas.
 
 */
 function createWaveform(canvas, media, opts) {
@@ -68,7 +100,7 @@ function createWaveform(canvas, media, opts) {
   var audioContext;
   var mediaStreamSource;
   // initialize MediaStream if available
-  var stream = (opts || {}).stream.stream || null;
+  var stream = ((opts || {}).stream || {}).stream || null;
 
   var context = canvas.getContext('2d');
 
@@ -124,7 +156,6 @@ function createWaveform(canvas, media, opts) {
 
   if (stream) {
     mediaStreamSource = audioContext.createMediaStreamSource(stream);
-    console.log(mediaStreamSource);
   } else {
     mediaStreamSource = audioContext.createMediaElementSource(media);
   }
@@ -138,4 +169,9 @@ function createWaveform(canvas, media, opts) {
 
   // start the drawing loop
   draw();
+
+  // start playback if requested
+  if ((opts || {}).play) {
+    analyser.connect(audioContext.destination);
+  }
 }
