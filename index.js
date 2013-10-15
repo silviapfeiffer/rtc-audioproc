@@ -28,6 +28,7 @@ var raf = require('cog/raf');
 
   This example shows how to pipe an audio file into the waveform display.
   The canvas will be added to the body element unless you provide a different
+  element to attach it to.
 
 
   <<< examples/new-audio.js
@@ -41,6 +42,7 @@ var raf = require('cog/raf');
     * height : the height of the canvas
     * stream : if you're using WebRTC, you need to hand in the MediaStream directly
     * play : if set to true, also route the audio to the output device
+    * attach : element to which the canvas will be added as a child
 
   ## Running the examples
 
@@ -58,20 +60,18 @@ module.exports = function(target, opts) {
     target :
     document.createElement('video');
 
-  // if the target is a media element
-  if (target === media) {
-    if (media.parentNode) {
-      // insert the canvas after the media parent element
-      media.parentNode.appendChild(canvas);
-    } else {
-      // insert after body
-      var body = document.getElementsByTagName("body")[0];
-      body.appendChild(canvas);
-    }
+  // attach canvas to DOM
+  if ((opts || {}).attach) {
+    // if there is an attach element, use that
+    attach.appendChild(canvas);
+  } else if (target === media && media.parentNode) {
+    // insert the canvas into the media parent element
+    media.parentNode.appendChild(canvas);
+  } else {
+    // fallback: insert canvas after body
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(canvas);
   }
-  // otherwise: error
-  else
-    return null;
 
   // initialise the canvas width and height
   canvas.width = (opts || {}).width || 480;

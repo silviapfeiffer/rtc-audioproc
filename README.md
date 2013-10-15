@@ -34,6 +34,7 @@ var canvas = waveform(videoElement, {"stream" : localvideo});
 
 This example shows how to pipe an audio file into the waveform display.
 The canvas will be added to the body element unless you provide a different
+element to attach it to.
 
 
 ```js
@@ -56,6 +57,7 @@ audio.play();
   * height : the height of the canvas
   * stream : if you're using WebRTC, you need to hand in the MediaStream directly
   * play : if set to true, also route the audio to the output device
+  * attach : element to which the canvas will be added as a child
 
 ## Running the examples
 
