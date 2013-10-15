@@ -6,6 +6,11 @@ stream. It uses the Web Audio API. This can be useful to display
 audio visually, or to track down when a video or audio element does
 not behave as you expect.
 
+BROWSER SUPPORT:
+* Chrome is the only browser that has support for Web Audio & WebRTC
+* works in Chrome for getUserMedia(), Audio(), <audio> and <video>
+* broekn in Chrome for PeerConnection, see https://code.google.com/p/chromium/issues/detail?id=121673
+
 
 
 [![NPM](https://nodei.co/npm/rtc-audio.png)](https://nodei.co/npm/rtc-audio/)
