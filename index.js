@@ -6,7 +6,7 @@
 var raf = require('cog/raf');
 
 /**
-  # rtc-audio
+  # rtc-audioproc
 
   This is a small helper module that allows you to render a canvas
   to visualize audio from an audio or video element, or a getUserMedia
