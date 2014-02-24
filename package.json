@@ -1,6 +1,6 @@
 {
   "name": "rtc-audioproc",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Draw audio waveform to a canvas using the Web Audio API",
   "main": "index.js",
   "scripts": {
