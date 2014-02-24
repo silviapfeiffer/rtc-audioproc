@@ -1,4 +1,4 @@
-# rtc-audio
+# rtc-audioproc
 
 This is a small helper module that allows you to render a canvas
 to visualize audio from an audio or video element, or a getUserMedia
@@ -13,7 +13,7 @@ BROWSER SUPPORT:
 
 
 
-[![NPM](https://nodei.co/npm/rtc-audio.png)](https://nodei.co/npm/rtc-audio/)
+[![NPM](https://nodei.co/npm/rtc-audioproc.png)](https://nodei.co/npm/rtc-audioproc/)
 
 [![unstable](http://hughsk.github.io/stability-badges/dist/unstable.svg)](http://github.com/hughsk/stability-badges)
 
@@ -25,7 +25,7 @@ example of how it works there:
 
 ```js
 var media = require('rtc-media');
-var waveform = require('rtc-audio');
+var waveform = require('rtc-audioproc');
 
 var localvideo = media();
 
@@ -42,7 +42,7 @@ The canvas will be added to the body element unless you provide a different
 element to attach it to.
 
 ```js
-var waveform = require('rtc-audio');
+var waveform = require('rtc-audioproc');
 
 var audio = new Audio('examples/media/Hydrate-Kenny_Beltrey.ogg');
 
@@ -59,7 +59,7 @@ This example shows how to create a waveform display for a video element.
 It also shows how to attach the waveform to a separate element.
 
 ```js
-var waveform = require('rtc-audio');
+var waveform = require('rtc-audioproc');
 
 var body = document.getElementsByTagName('body')[0];
 var div = document.createElement('div');
@@ -98,7 +98,7 @@ $ beefy examples/rtc-media.js
 
 ### Apache 2.0
 
-Copyright 2013 National ICT Australia Limited (NICTA)
+Copyright 2014 National ICT Australia Limited (NICTA)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
