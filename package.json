@@ -20,7 +20,7 @@
     "url": "https://github.com/rtc-io/rtc-audio/issues"
   },
   "dependencies": {
-    "cog": "~0.3.0"
+    "cog": "~0.5.1"
   },
   "devDependencies": {
     "rtc-media": "*"
